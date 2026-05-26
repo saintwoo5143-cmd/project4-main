@@ -100,6 +100,23 @@ function App() {
     }
   };
 
+  const handleView = async (id) => {
+    try {
+      const book = books.find((book) => book.id === id);
+      const res = await fetch(`${bookURL}/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ views: (book.views || 0) + 1 }),
+      });
+      const updated = await res.json();
+      setBooks(books.map((book) => (book.id === id ? updated : book)));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  
+
   if (loading)
     return <>
             <Header /> <p>불러오는 중...</p>
@@ -146,7 +163,7 @@ function App() {
                     />
                   </label>
                 </div>
-                <List query={query} books={books} onDelete={handleDelete} onLike={handleLike} />
+                <List query={query} books={books} onDelete={handleDelete} onLike={handleLike} onView={handleView} />
               </>
             }
           />

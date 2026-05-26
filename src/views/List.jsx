@@ -30,7 +30,7 @@ function Card({ item, onClick }) {
   )
 }
 
-export default function List({ query = '', books = [], onDelete, onLike }) {
+export default function List({ query = '', books = [], onDelete, onLike, onView }) {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [selectedId, setSelectedId] = useState(null)
@@ -60,6 +60,9 @@ export default function List({ query = '', books = [], onDelete, onLike }) {
   const handleOpen = (item) => {
     setSelectedId(item.id)
     setOpen(true)
+    if (item && item.id) {
+      onView(item.id);
+    }
   }
 
   const handleClose = () => {
@@ -135,6 +138,8 @@ export default function List({ query = '', books = [], onDelete, onLike }) {
               <div className="book-like-info">
                 <span>좋아요</span>
                 <strong>{selected.likes || 0}</strong>
+                <span>조회수</span>
+                <strong>{selected.views || 0}</strong>
               </div>
                 <button
                 type="button"

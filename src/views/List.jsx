@@ -2,18 +2,30 @@ import React, { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 function Card({ item, onClick }) {
+  const imageSrc =
+    item.coverImageUrl && item.coverImageUrl.trim()
+      ? item.coverImageUrl
+      : item.image || '/noImage.jpg'
+
   return (
-    <div className="card" onClick={onClick}>
-      <img
-        className="card-img"
-        src={item.coverImageUrl && item.coverImageUrl.trim() ? item.coverImageUrl : '/noImage.jpg'}
-        alt={item.title}
-      />
-      <div className="card-content">
+    <article
+      className="list-book-card"
+      role="button"
+      tabIndex={0}
+      onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onClick()
+        }
+      }}
+    >
+      <img className="list-book-image" src={imageSrc} alt={item.title} />
+      <div className="list-book-content">
         <h3>{item.title}</h3>
-        <p>{item.content}</p>
+        <p className="list-book-author">작가: {item.author || '저자 미상'}</p>
       </div>
-    </div>
+    </article>
   )
 }
 
@@ -24,11 +36,20 @@ export default function List({ query = '', books = [] }) {
 
   const filteredItems = useMemo(() => {
     const q = query.trim().toLowerCase()
+
     if (!q) return books
+
     return books.filter((item) => {
+      const title = item.title || ''
+      const author = item.author || ''
+      const content = item.content || ''
+      const subtitle = item.subtitle || ''
+
       return (
-        item.title.toLowerCase().includes(q) ||
-        item.content.toLowerCase().includes(q)
+        title.toLowerCase().includes(q) ||
+        author.toLowerCase().includes(q) ||
+        content.toLowerCase().includes(q) ||
+        subtitle.toLowerCase().includes(q)
       )
     })
   }, [query, books])
@@ -43,24 +64,52 @@ export default function List({ query = '', books = [] }) {
     setSelected(null)
   }
 
+  const handleLikeClick = () => {
+    if (selected && onLike) {
+      onLike(selected.id)
+    }
+  }
+
+  // if (loading) {
+  //   return <p className="list-state-message">도서 목록을 불러오는 중입니다.</p>
+  // }
+
+  // if (error) {
+  //   return <p className="list-state-message">{error}</p>
+  // }
+
   return (
-    <div>
-      <div className="image-grid">
+    <div className="list-page-wrap">
+      {/* UI/레이아웃팀 담당: List 페이지 카드 그리드 레이아웃 */}
+      <section className="list-book-grid">
         {filteredItems.map((item) => (
           <Card key={item.id} item={item} onClick={() => handleOpen(item)} />
         ))}
-      </div>
+      </section>
 
       {open && selected && (
-        <div className="modal-overlay" onClick={handleClose}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h3>{selected.title}</h3>
-              <button className="modal-close" onClick={handleClose}>✕</button>
+        <div className="book-modal-overlay" onClick={handleClose}>
+          {/* UI/레이아웃팀 담당: 상세 모달 UI/레이아웃 정리 */}
+          <section className="book-detail-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="book-detail-header">
+              <div>
+                <h3>{selected.title}</h3>
+                {/* UI/레이아웃팀 담당: 작가 이름을 책 제목 아래에 배치 */}
+                <p className="book-detail-author">작가: {selected.author || '저자 미상'}</p>
+              </div>
+
+              <button type="button" className="book-detail-close" onClick={handleClose}>
+                닫기
+              </button>
             </div>
+
             <img
-              className="modal-image"
-              src={selected.coverImageUrl && selected.coverImageUrl.trim() ? selected.coverImageUrl : '/noImage.jpg'}
+              className="book-detail-image"
+              src={
+                selected.coverImageUrl && selected.coverImageUrl.trim()
+                  ? selected.coverImageUrl
+                  : selected.image || '/noImage.jpg'
+              }
               alt={selected.title}
             />
             <p className="modal-subtitle">{selected.content}</p>
@@ -74,7 +123,25 @@ export default function List({ query = '', books = [] }) {
                 수정
               </button>
             </div>
-          </div>
+
+            {/* UI/레이아웃팀 담당: 좋아요 개수 표시 UI만 배치 */}
+            {/* TODO: 좋아요 클릭 기능과 PATCH /books/id 연결은 CRUD 담당자가 처리 */}
+            <div className="book-detail-actions">
+              <div className="book-like-info">
+                <span>좋아요</span>
+                <strong>{selected.likes || 0}</strong>
+              </div>
+
+              <button type="button" className="book-like-button" onClick={handleLikeClick}>
+                <span aria-hidden="true">😍</span>
+                좋아요
+              </button>
+
+              <button type="button" className="book-edit-button">
+                수정
+              </button>
+            </div>
+          </section>
         </div>
       )}
     </div>

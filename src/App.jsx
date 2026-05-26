@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
 import List from './views/List'
 import Header from './components/Header'
@@ -10,33 +10,40 @@ import Update from './views/Update'
 
 function App() {
   const [query, setQuery] = useState('')
-  const navigate = useNavigate()
-
   const [books, setBooks] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  const navigate = useNavigate()
   const bookURL = 'http://localhost:3000/books'
 
-  {/*load*/}
   useEffect(() => {
     async function loadBooks() {
       try {
         const res = await fetch(bookURL)
         const data = await res.json()
         setBooks(data)
-        console.log(data)
       } catch (err) {
         console.error(err)
         setError('데이터를 불러오지 못했어요.')
       }
       setLoading(false)
     }
+
     loadBooks()
   }, [])
 
-  {/*Add*/}
   const handleAddBook = async (newBook) => {
+    try {
+      const res = await fetch(bookURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newBook),
+      })
+    } catch (err) {
+      console.error(err)
+    }
+
     try {
       const res = await fetch(bookURL, {
         method: 'POST',
@@ -51,7 +58,7 @@ function App() {
     }
   }
 
-  {/* Update*/}
+
   const handleUpdateBook = async (id, updatedFields) => {
     try {
       const res = await fetch(`${bookURL}/${id}`, {
@@ -60,40 +67,36 @@ function App() {
         body: JSON.stringify(updatedFields),
       })
       const updated = await res.json()
-      setBooks(books.map((b) => (b.id === id ? updated : b)))
-      navigate('/list');
+      setBooks(books.map((book) => (book.id === id ? updated : book)))
+      navigate('/list')
     } catch (err) {
       console.error(err)
     }
-  };
+  }
 
-  {/*Delete*/}
   const handleDelete = async (id) => {
     try {
-      await fetch(`${bookURL}/${id}`,
-        {method: 'DELETE'}
-      );
-      setBooks(books.filter(p => p.id !== id));
-    } catch(err) {
-      console.error(err);
+      await fetch(`${bookURL}/${id}`, {
+        method: 'DELETE',
+      })
+      setBooks(books.filter((book) => book.id !== id))
+    } catch (err) {
+      console.error(err)
     }
-  };
+  }
 
-  {/*Like*/} 
   const handleLike = async (id) => {
     try {
-      const book = books.find(p => p.id === id);
-      const res = await fetch(`${bookURL}/${id}`,
-        {
-          method:'PATCH',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({likes: book.likes + 1})
-        }
-      );
+      const book = books.find((book) => book.id === id)
+      const res = await fetch(`${bookURL}/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ likes: (book.likes || 0) + 1 }),
+      })
       const updated = await res.json()
-      setBooks(books.map((p) => (p.id === id ? updated : p)))
+      setBooks(books.map((book) => (book.id === id ? updated : book)))
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
   };
 
@@ -124,21 +127,24 @@ function App() {
       <Header />
 
       <main className="app-main">
-        {/* Search only visible on /list route */}
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home books={books} />} />
           <Route
             path="/list"
             element={
               <>
-                <div className="header-center" style={{ marginBottom: '24px' }}>
-                  <input
-                    aria-label="search"
-                    className="search-input"
-                    placeholder="책 제목이나 설명으로 검색"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                  />
+                {/* UI/레이아웃팀 담당: List 검색창 위치/디자인 개선 */}
+                <div className="list-search-area">
+                  <label className="list-search-box">
+                    <span className="search-icon">🔍</span>
+                    <input
+                      aria-label="search"
+                      className="list-search-input"
+                      placeholder="책 제목 또는 작가로 검색"
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                    />
+                  </label>
                 </div>
                 <List query={query} books={books} onDelete={handleDelete} />
               </>

@@ -274,6 +274,28 @@
       "coverImageUrl": "./test_src/01.png",
       "createdAt": "2026-05-26T02:32:44.170Z",
       "updatedAt": "2026-05-26T02:32:44.170Z"
+    },
+    {
+      "title": "데일 카네기 인간관계론",
+      "content": "사람의 마음을 사로잡고 설득하는 영원불멸의 대화법과 소통의 원칙들을 다룹니다. 직장과 일상에서 성공적인 인간관계를 맺기 위한 최고의 지침서입니다.",
+      "author": "데일 카네기",
+      "likes": 0,
+      "views": 0,
+      "coverImageUrl": "./test_src/01.png",
+      "createdAt": "2026-05-26T06:13:37.690Z",
+      "updatedAt": "2026-05-26T06:13:37.690Z",
+      "id": "-AYAogI"
+    },
+    {
+      "title": "데일 카네기 인간관계론",
+      "content": "사람의 마음을 사로잡고 설득하는 영원불멸의 대화법과 소통의 원칙들을 다룹니다. 직장과 일상에서 성공적인 인간관계를 맺기 위한 최고의 지침서입니다.",
+      "author": "데일 카네기",
+      "likes": 6,
+      "views": 0,
+      "coverImageUrl": "./test_src/01.png",
+      "createdAt": "2026-05-26T06:13:37.690Z",
+      "updatedAt": "2026-05-26T06:13:37.690Z",
+      "id": "PaTavHe"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

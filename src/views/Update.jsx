@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import UpdateForm from '../components/UpdateForm'
 
 export default function Update({ bookURL, onUpdate }) {
   const { id } = useParams()
@@ -47,46 +48,16 @@ export default function Update({ bookURL, onUpdate }) {
   return (
     <div className="update-container">
       <h2 className="update-title">도서 정보 수정</h2>
-      <form onSubmit={handleSubmit} className="update-form">
-        
-        <div className="form-group">
-          <label htmlFor="title">제목</label>
-          <input 
-            id="title"
-            type="text" 
-            value={title} 
-            onChange={(e) => setTitle(e.target.value)} 
-            required 
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="author">저자</label>
-          <input 
-            id="author"
-            type="text" 
-            value={author} 
-            onChange={(e) => setAuthor(e.target.value)} 
-            required 
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="content">상세 내용</label>
-          <textarea 
-            id="content"
-            value={content} 
-            onChange={(e) => setContent(e.target.value)} 
-            required 
-          />
-        </div>
-        
-        <div className="button-group">
-          <button type="submit" className="btn submit-btn">수정 완료</button>
-          <button type="button" onClick={() => navigate('/list')} className="btn cancel-btn">취소</button>
-        </div>
-
-      </form>
+      <UpdateForm
+        title={title}
+        author={author}
+        content={content}
+        setTitle={setTitle}
+        setAuthor={setAuthor}
+        setContent={setContent}
+        onSubmit={handleSubmit}
+        onCancel={() => navigate('/list')}
+      />
     </div>
   )
 }

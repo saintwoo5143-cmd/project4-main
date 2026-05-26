@@ -40,16 +40,6 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newBook),
       })
-    } catch (err) {
-      console.error(err)
-    }
-
-    try {
-      const res = await fetch(bookURL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newBook),
-      })
       const saved = await res.json()
       setBooks([saved, ...books])
       navigate('/list')

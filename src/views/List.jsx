@@ -67,6 +67,14 @@ export default function List({ query = '', books = [], onLike }) {
     setSelectedId(null)
   }
 
+
+  const handleDeleteClick = async () => {
+    if (window.confirm('정말 이 도서를 삭제하시겠습니까?')) {
+      await onDelete(selected.id); 
+      handleClose();               
+    }
+  };
+
   const handleLikeClick = () => {
     if (selected && onLike) {
       onLike(selected.id)
@@ -80,6 +88,7 @@ export default function List({ query = '', books = [], onLike }) {
   // if (error) {
   //   return <p className="list-state-message">{error}</p>
   // }
+
 
   return (
     <div className="list-page-wrap">
@@ -124,6 +133,13 @@ export default function List({ query = '', books = [], onLike }) {
                 }}
               >
                 수정
+              </button>
+
+              <button 
+                className="modal-button" 
+                onClick={handleDeleteClick}
+              >
+                삭제
               </button>
             </div>
 

@@ -23,8 +23,14 @@ function Card({ item, onClick }) {
       <img className="list-book-image" src={imageSrc} alt={item.title} />
       <div className="list-book-content">
         <h3>{item.title}</h3>
-        <p className="list-book-author">작가: {item.author || '저자 미상'}</p>
-        <em>좋아요 {item.likes || 0}</em>
+        <div className="list-book-meta">
+          <p className="list-book-author">작가: {item.author || '저자 미상'}</p>
+          <div className="list-book-meta-right">
+            <em>좋아요 {item.likes || 0}</em>
+            <span className="list-book-views">조회 {item.views || 0}</span>
+            
+          </div>
+        </div>
       </div>
     </article>
   )

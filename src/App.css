@@ -306,6 +306,41 @@
   font-weight: 900;
 }
 
+.list-book-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.list-book-meta-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.list-book-author {
+  margin: 0;
+  color: #6a6f7a;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.list-book-views {
+  color: #6a6f7a;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.list-book-content em {
+  color: #d18b00;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 900;
+}
+
 .list-book-content em {
   color: #d18b00;
   font-size: 13px;

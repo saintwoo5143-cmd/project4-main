@@ -105,7 +105,7 @@ function App() {
         }
       }
 
-      //  json-server에서 도서 삭제
+      // json-server에서 도서 삭제 (요청은 딱 한 번만!)
       const res = await fetch(`${bookURL}/${id}`, {
         method: 'DELETE',
       });
@@ -114,7 +114,7 @@ function App() {
         throw new Error('삭제에 실패했습니다.');
       }
 
-      
+      // 프론트 상태 갱신
       setBooks((prevBooks) =>
         prevBooks.filter((b) => String(b.id) !== String(id))
       );

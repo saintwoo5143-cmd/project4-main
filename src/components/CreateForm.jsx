@@ -9,9 +9,9 @@ function CreateForm({ onAddBook,onCancel }) {
 
   return (
     <section className="create-write-page">
-      <h2 className="create-write-title">새글작성</h2>
-      <div className="create-write-layout">
+      <h5 className="create-write-title">새글 생성</h5>
         <div className="create-write-form">
+          <h1 className="create-write-title">내용 생성</h1>
           <InputInfo
             title={title}
             setTitle={setTitle}
@@ -20,6 +20,7 @@ function CreateForm({ onAddBook,onCancel }) {
             content={content}
             setContent={setContent}
           />
+          <h1 className="create-write-title">썸네일 생성</h1>
           <CreateImageForm
             title={title}
             author={author}
@@ -28,7 +29,6 @@ function CreateForm({ onAddBook,onCancel }) {
             onCancel={onCancel}
           />
         </div>
-      </div>
     </section>
   )
 }

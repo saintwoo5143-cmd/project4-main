@@ -21,6 +21,7 @@ function CreateImageForm({ title, author, content, onAddBook, onCancel }) {
   const [createdAt, setCreatedAt] = useState('')
   const [updatedAt, setUpdatedAt] = useState('')
   const [quality, setQuality] = useState('medium')
+  const [imageSize, setImageSize] = useState('768x1024')
   const [apiKey, setApiKey] = useState('')
   const [coverImageUrl, setCoverImageUrl] = useState('/test_src/01.png')
   const [loading, setLoading] = useState(false)
@@ -61,9 +62,10 @@ function CreateImageForm({ title, author, content, onAddBook, onCancel }) {
           model: 'gpt-image-2',
           prompt,
           n: 1,
-          size: '1024x1536',
+          size: imageSize,
+          output_compression: 15,
           quality,
-          output_format: 'png',
+          output_format: 'jpeg',
         }),
       })
 
@@ -127,22 +129,37 @@ function CreateImageForm({ title, author, content, onAddBook, onCancel }) {
     
     return (
         <form className="create-write-layout">
+
+            <aside className="create-preview-card">
+                <div className="create-preview-image-box">
+                    <img src={coverImageUrl} alt="book cover" />
+                </div>
+
+                <strong>이미지 미리보기</strong>
+                <p>선택된 품질: {quality}</p>
+                <p>선택된 크기: {imageSize}</p>
+                <span>
+                    입력 작성 후 이미지 생성하기를 누르고, 기다리시면 생성된 이미지가 보입니다.
+                </span>
+            </aside>
             <div className="create-write-form">
                 <label>
                     api키
-
-                    <input
-                        type= "password"
-                        value={apiKey}
-                        placeholder="api키"
-                        onChange={(e) => setApiKey(e.target.value)}
-                    />
                     <MaskedApiKeyInput value={apiKey} onChange={setApiKey} />
                 </label>
 
                 <div className="create-quality-group">
                     <p>품질</p>
                     <Dropdown value={quality} onChange={setQuality} />
+                </div>
+
+                <div className="create-quality-group">
+                    <p>이미지 크기</p>
+                    <select value={imageSize} onChange={e => setImageSize(e.target.value)}>
+                      <option value="640x1024">640x1024</option>
+                      <option value="768x1024">768x1024</option>
+                      <option value="896x1280">896x1280</option>
+                    </select>
                 </div>
 
                 <div className="create-action-row">
@@ -172,18 +189,6 @@ function CreateImageForm({ title, author, content, onAddBook, onCancel }) {
                     </button>
                 </div>
             </div>
-
-            <aside className="create-preview-card">
-                <div className="create-preview-image-box">
-                    <img src={coverImageUrl} alt="book cover" />
-                </div>
-
-                <strong>이미지 미리보기</strong>
-                <p>선택된 품질: {quality}</p>
-                <span>
-                    입력 작성 후 이미지 생성하기를 누르고, 기다리시면 생성된 이미지가 보입니다.
-                </span>
-            </aside>
         </form>
     )
 };

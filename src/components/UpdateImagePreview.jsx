@@ -28,7 +28,6 @@ function UpdatePreviewCard({ coverImageUrl, title, quality }) {
           alt={title || 'book cover'}
         />
       </div>
-
       <strong>이미지 미리보기</strong>
       <p>선택된 품질: {quality}</p>
       <span>

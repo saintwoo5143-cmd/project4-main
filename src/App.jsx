@@ -89,6 +89,11 @@ function App() {
     try {
       const book = books.find((b) => String(b.id) === String(id))
 
+
+    await fetch(`${bookURL}/${id}`, {
+       method: "DELETE" 
+      });
+
       // 이미지 서버에 저장된 이미지일 때만 이미지 파일 삭제 요청
       if (book?.coverImageUrl?.includes('/images/')) {
         const filename = book.coverImageUrl.split('/images/')[1]
@@ -177,17 +182,6 @@ function App() {
     )
   
 
-  // const filteredItems = useMemo(() => {
-  //   const q = query.trim().toLowerCase()
-  //   if (!q) return sampleItems
-  //   return sampleItems.filter((item) => {
-  //     return (
-  //       item.title.toLowerCase().includes(q) ||
-  //       item.subtitle.toLowerCase().includes(q)
-  //     )
-  //   })
-  // }, [query])
-
   return (
     <div className="app-root">
       <Header />
@@ -199,7 +193,6 @@ function App() {
             path="/list"
             element={
               <>
-                {/* UI/레이아웃팀 담당: List 검색창 위치/디자인 개선 */}
                 <div className="list-search-area">
                   <label className="list-search-box">
                     <span className="search-icon">🔍</span>

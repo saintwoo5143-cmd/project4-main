@@ -4,7 +4,6 @@ import UpdateForm from '../components/UpdateForm'
 
 export default function Update({ bookURL, onUpdate }) {
   const { id } = useParams()
-  console.log("id:", id)
   const navigate = useNavigate()
 
   const [book, setBook] = useState(null)

@@ -29,7 +29,6 @@ function InputInfo({ title, setTitle, author, setAuthor, content, setContent }) 
           rows={8}
           onChange={(e) => setContent(e.target.value)}
         />
-        {/* <span className="create-count">{content.length}자</span> */}
       </label>
     </>
   )

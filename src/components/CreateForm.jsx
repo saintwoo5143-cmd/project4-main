@@ -1,4 +1,3 @@
-// import { fetchBooks, formatDate } from '../api.js'
 import { useState } from 'react'
 import InputInfo from './InputInfo'
 import CreateImageForm from './CreateImageForm'
@@ -11,7 +10,6 @@ function CreateForm({ onAddBook }) {
   return (
     <section className="create-write-page">
       <h2 className="create-write-title">새글작성</h2>
-
       <div className="create-write-layout">
         <div className="create-write-form">
           <InputInfo
@@ -22,7 +20,6 @@ function CreateForm({ onAddBook }) {
             content={content}
             setContent={setContent}
           />
-
           <CreateImageForm
             title={title}
             author={author}

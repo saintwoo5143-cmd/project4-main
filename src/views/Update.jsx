@@ -56,10 +56,49 @@ export default function Update({ bookURL, onUpdate }) {
   }
 
   return (
-    <UpdateForm
-      initialBook={book}
-      onSubmit={handleSubmit}
-      onCancel={() => navigate('/list')}
-    />
+    <section className="create-write-page">
+      <h2 className="update-title">도서 정보 수정</h2>
+      <form onSubmit={handleSubmit} className="create-write-form">
+        {/* <div className="create-write-form"></div> */}
+        <div className="form-group">
+          <label htmlFor="title">제목</label>
+          <input 
+            id="title"
+            type="text" 
+            value={title} 
+            onChange={(e) => setTitle(e.target.value)} 
+            required 
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="author">저자</label>
+          <input 
+            id="author"
+            type="text" 
+            value={author} 
+            onChange={(e) => setAuthor(e.target.value)} 
+            required 
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="content">상세 내용</label>
+          <textarea 
+            id="content"
+            value={content} 
+            onChange={(e) => setContent(e.target.value)} 
+            required 
+            rows="8" cols="50"
+          />
+        </div>
+        
+        <div className="button-group">
+          <button type="submit" className="create-submit-button">수정 완료</button>
+          <button type="button" className="create-preview-button" onClick={() => navigate('/list')}>취소</button>
+        </div>
+
+      </form>
+    </section>
   )
 }

@@ -34,92 +34,92 @@ function CreateImageForm({title, author, content, onAddBook}) {
         setUpdatedAt(day);
     }, []);
 
-    const handleSubmitBook = async () => {
-        const now = new Date().toISOString()
+    const handleFinalForm = async () => {
+        const prompt = `
+                        # 역할
+                        너는 북커버 제작 담당자야. 
+                        
+                        # 지침
+                        - 북커버의 앞면 표지만을 보여줄 것
+                        - 전문적인 북커버 디자인, 높은 퀄리티의 일러스트레이션, 두드러진 시각적 표현, 작품에 적합한 안전성
+                        - 이야기의 분위기나 무드를 포함
+                        
+                        # 책 정보
+                        - 제목 : "${title}"
+                        - 내용 요약 : ${content}.
+                        `
+        // 1. AI Image 생성
+        try {
+            if (loading === false) {
+                setCoverImageUrl('./test_src/loading.gif');
+                setLoading(true);
+            }
+            const res = await fetch("http://localhost:3001/api/image", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    model: "gpt-image-1",
+                    prompt,
+                    n : 1,
+                    size: "1024x1536",
+                    quality,
+                    output_format: 'png'
+                }),
+            });
+            
+            setLoading(false);
 
-        const newBook = {
+            if (!res.ok) {
+                setCoverImageUrl('./test_src/error.png');
+                const errData = await res.json().catch(() => ({}))
+                const status = res.status
+                if (status === 401) throw new Error('API Key가 올바르지 않습니다. 확인 후 다시 시도해주세요.')
+                if (status === 429) throw new Error('요청 한도를 초과했습니다. 잠시 후 다시 시도해주세요.')
+                throw new Error(errData?.error?.message || 'OpenAI 이미지 생성에 실패했습니다.')
+            }
+
+            const data = await res.json();
+            console.log("OPENAI RESPONSE:", data);
+            const b64Json = data?.data?.[0]?.b64_json;
+            if (!b64Json) throw new Error('이미지 데이터를 받지 못했습니다.');
+            
+            const imageUrl = `data:image/png;base64,${b64Json}`;
+            setCoverImageUrl(imageUrl);
+        } catch (err) { console.error(err); }
+        
+        const generateId = () => {
+            return Math.floor(Math.random() * 1000000)
+        }
+
+        const newBook = await {
+            id : generateId(),
             title,
             content,
             author,
             likes: 0,
             views: 0,
-            coverImageUrl: getSavableImageUrl(coverImageUrl),
-            createdAt: createdAt || now,
-            updatedAt: now,
+            coverImageUrl,
+            createdAt,
+            updatedAt,
         }
-
+            
         if (onAddBook) {
             await onAddBook(newBook)
-        }
-    }
-
-    const handlePreviewImage = async () => {
-    const prompt = `
-    # 역할
-    너는 북커버 제작 담당자야.
-
-    # 지침
-    - 북커버의 앞면 표지만을 보여줄 것
-    - 전문적인 북커버 디자인, 높은 퀄리티의 일러스트레이션, 두드러진 시각적 표현, 작품에 적합한 안전성
-    - 이야기의 분위기나 무드를 포함
-
-    # 책 정보
-    - 제목 : "${title}"
-    - 작가 : "${author}"
-    - 내용 요약 : ${content}.
-    `
-
-    try {
-        setCoverImageUrl('/test_src/loading.gif')
-        setLoading(true)
-
-        const res = await fetch('https://api.openai.com/v1/images/generations', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${ai_api_key}`,
-        },
-        body: JSON.stringify({
-            model: 'gpt-image-1',
-            prompt,
-            n: 1,
-            size: '1024x1536',
-            quality,
-            output_format: 'png',
-        }),
-        })
-
-        if (!res.ok) {
-        setCoverImageUrl('/test_src/error.png')
-
-        const errData = await res.json().catch(() => ({}))
-        const status = res.status
-
-        if (status === 401) {
-            throw new Error('API Key가 올바르지 않습니다. 확인 후 다시 시도해주세요.')
+            return
         }
 
-        if (status === 429) {
-            throw new Error('요청 한도를 초과했습니다. 잠시 후 다시 시도해주세요.')
+        try {
+            const res = await fetch('http://localhost:3000/books', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(newBook)
+            })
+            console.log(res.ok)
+        } catch (err) {
+            console.error(err)
         }
-
-        throw new Error(errData?.error?.message || 'OpenAI 이미지 생성에 실패했습니다.')
-        }
-
-        const data = await res.json()
-        const b64Json = data?.data?.[0]?.b64_json
-
-        if (!b64Json) {
-        throw new Error('이미지 데이터를 받지 못했습니다.')
-        }
-
-        const imageUrl = `data:image/png;base64,${b64Json}`
-        setCoverImageUrl(imageUrl)
-    } catch (err) {
-        console.error(err)
-    } finally {
-        setLoading(false)
-    }
     }
     
     return (

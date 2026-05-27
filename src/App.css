@@ -475,7 +475,93 @@
   color: var(--color-white);
 }
 
+
 /* 상세 모달 UI/레이아웃 개선 */
+
+.lower-footer {
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-top: 1px solid #e0dcd7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+.lower-content {
+  display: inline-flex;
+  gap: 12px;
+  color: #111;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.lower-link {
+  border: 0;
+  background: transparent;
+  color: #111;
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  padding: 0;
+}
+
+.lower-link:hover {
+  opacity: 0.82;
+}
+
+.lower-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 16px;
+}
+
+.lower-modal {
+  width: min(420px, 100%);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  box-shadow: var(--shadow-modal);
+  padding: 18px;
+}
+
+.lower-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.lower-modal-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-navy);
+}
+
+.lower-modal-close {
+  border: 0;
+  background: transparent;
+  color: #111;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.lower-modal-body p {
+  margin: 0 0 10px;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
 .book-detail-modal {
   width: min(760px, calc(100% - 32px));
   max-height: 90vh;

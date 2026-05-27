@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import Dropdown from './Dropdown'
+import MaskedApiKeyInput from './MaskedApiKeyInput'
 
 function getSavableImageUrl(imageUrl) {
   const invalidPreviewImages = [
@@ -138,12 +139,14 @@ function CreateImageForm({ title, author, content, onAddBook }) {
             <div className="create-write-form">
                 <label>
                     api키
+
                     <input
                         type= "password"
                         value={apiKey}
                         placeholder="api키"
                         onChange={(e) => setApiKey(e.target.value)}
                     />
+                    <MaskedApiKeyInput value={apiKey} onChange={setApiKey} />
                 </label>
 
                 <div className="create-quality-group">

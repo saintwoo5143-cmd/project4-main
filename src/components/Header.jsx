@@ -8,8 +8,12 @@ function Header() {
   return (
     <header className="app-header">
       <h1 className="app-title" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-        Image Gallery
+        <span className="app-title-mark" aria-hidden="true">📚</span>
+        <span className="app-title-text">
+          <strong>북</strong>적<strong>북</strong>적 <strong>북</strong>카페
+        </span>
       </h1>
+
       <nav className="header-nav">
         <NavLink to="/" className="nav-link">Home</NavLink>
         <NavLink to="/list" className="nav-link">List</NavLink>

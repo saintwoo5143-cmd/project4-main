@@ -119,16 +119,21 @@ export default function List({ query = '', books = [], onDelete, onLike, onView 
               </button>
             </div>
 
-            <img
-              className="book-detail-image"
-              src={
-                selected.coverImageUrl && selected.coverImageUrl.trim()
-                  ? selected.coverImageUrl
-                  : selected.image || '/noImage.jpg'
-              }
-              alt={selected.title}
-            />
-            <p className="modal-subtitle">{selected.content}</p>
+            <div className="book-detail-main">
+  <div className="book-detail-image-wrap">
+    <img
+      className="book-detail-image"
+      src={
+        selected.coverImageUrl && selected.coverImageUrl.trim()
+          ? selected.coverImageUrl
+          : selected.image || '/noImage.jpg'
+      }
+      alt={selected.title}
+    />
+  </div>
+
+  <p className="modal-subtitle">{selected.content}</p>
+</div>
             <div className="book-detail-actions">
               <div className="book-like-info">
                 <span>좋아요</span>

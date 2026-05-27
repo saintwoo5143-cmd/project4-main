@@ -48,7 +48,7 @@ function App() {
       }
 
       const saved = await res.json()
-
+ 
       setBooks((prevBooks) => [saved, ...prevBooks])
       navigate('/list')
     } catch (err) {
@@ -56,7 +56,6 @@ function App() {
       setError(err.message || '도서 등록에 실패했습니다.')
     }
   }
-
 
   const handleUpdateBook = async (id, updatedFields) => {
     try {

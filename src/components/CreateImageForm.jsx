@@ -57,7 +57,7 @@ function CreateImageForm({ title, author, content, onAddBook }) {
           Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: 'gpt-image-1',
+          model: 'gpt-image-2',
           prompt,
           n: 1,
           size: '1024x1536',

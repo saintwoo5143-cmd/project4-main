@@ -15,7 +15,7 @@ function Lower() {
     <>
       <footer className="lower-footer">
         <div className="lower-content">
-          <span>(주)케이티에이블</span>
+          <span>(주)케이티에이블2조</span>
           <button type="button" className="lower-link" onClick={() => handleOpen('terms')}>
             이용약관
           </button>

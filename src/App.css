@@ -42,9 +42,9 @@
   margin-top: 0;
 }
 
-/* UI/레이아웃팀 담당: 전체 톤에 맞춘 Header + Home UI/레이아웃 개선 */
+/*전체 톤에 맞춘 Header + Home UI/레이아웃 개선 */
 
-/* 1. 파란색 네비바를 사이트 톤에 맞는 어두운 색으로 변경 */
+/* 파란색 네비바를 사이트 톤에 맞는 어두운 색으로 변경 */
 .app-header {
   background: var(--color-navy);
   color: var(--color-white);
@@ -55,7 +55,7 @@
   box-shadow: var(--shadow-header);
 }
 
-/* 2. Image Gallery 로고 텍스트 크기와 존재감 개선 */
+/* Image Gallery 로고 텍스트 크기와 존재감 개선 */
 .app-title {
   margin: 0;
   color: var(--color-white);
@@ -63,7 +63,7 @@
   font-weight: 900;
 }
 
-/* 3. Home/List/Create 버튼 간격 개선 및 오른쪽 잘림 방지 */
+/* Home/List/Create 버튼 간격 개선 및 오른쪽 잘림 방지 */
 .header-nav {
   display: flex;
   gap: 18px;
@@ -117,7 +117,7 @@
   color: var(--color-navy);
 }
 
-/* 4. 카드 컨테이너 좌우 여백을 넓혀 답답함 완화 */
+/* 카드 컨테이너 좌우 여백을 넓혀 답답함 완화 */
 .home-book-section {
   max-width: 980px;
   margin: 40px auto;
@@ -128,7 +128,7 @@
   text-align: left;
 }
 
-/* 5. 전체 보기 버튼이 너무 오른쪽 끝에 붙지 않도록 헤더 섹션 정렬 보정 */
+/* 전체 보기 버튼이 너무 오른쪽 끝에 붙지 않도록 헤더 섹션 정렬 보정 */
 .home-book-header {
   display: flex;
   align-items: flex-start;
@@ -186,8 +186,8 @@
   gap: 24px;
 }
 
-/* 6. 카드 hover 효과 추가 */
-/* UI/레이아웃팀 담당: 홈 화면 카드 hover 효과 추가 */
+/* 카드 hover 효과 추가 */
+
 .home-book-card {
   padding: 12px;
   border: 1px solid var(--color-border-warm);
@@ -201,7 +201,7 @@
   box-shadow: var(--shadow-card-hover);
 }
 
-/* 7. 카드 이미지 비율을 책 표지에 맞게 조정 */
+/* 카드 이미지 비율을 책 표지에 맞게 조정 */
 .home-book-card img,
 .home-book-image {
   display: block;
@@ -217,10 +217,10 @@
   font-size: 14px;
 }
 
-/* UI/레이아웃팀 담당: List 페이지를 Home과 같은 베이지/네이비 톤으로 통일 */
 
-/* UI/레이아웃팀 담당: List 검색 영역 간격 정리 */
-/* UI/레이아웃팀 담당: List 검색창 위치/디자인 개선 */
+
+/* List 검색 영역 간격 정리 */
+/* List 검색창 위치/디자인 개선 */
 .list-search-area {
   width: min(1180px, calc(100% - 48px));
   margin: 8px auto 28px;
@@ -255,22 +255,22 @@
   font-size: 14px;
 }
 
-/* UI/레이아웃팀 담당: List 카드 컨테이너 폭과 여백 조정 */
+/* List 카드 컨테이너 폭과 여백 조정 */
 .list-page-wrap {
   width: min(1180px, calc(100% - 48px));
   margin: 0 auto 56px;
 }
 
-/* UI/레이아웃팀 담당: List 카드 그리드 레이아웃 */
+/* List 카드 그리드 레이아웃 */
 .list-book-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 24px;
 }
 
-/* UI/레이아웃팀 담당: Home과 같은 톤의 카드 스타일 */
-/* UI/레이아웃팀 담당: 카드 hover 효과 */
-/* UI/레이아웃팀 담당: 메인과 동일한 카드 hover 효과 */
+/* Home과 같은 톤의 카드 스타일 */
+/* 카드 hover 효과 */
+/* 메인과 동일한 카드 hover 효과 */
 .list-book-card {
   overflow: hidden;
   border-radius: var(--radius-md);
@@ -285,7 +285,7 @@
   box-shadow: var(--shadow-card-hover);
 }
 
-/* UI/레이아웃팀 담당: 책 표지 비율 정리 */
+/* 책 표지 비율 정리 */
 .list-book-image {
   display: block;
   width: 100%;
@@ -293,7 +293,7 @@
   object-fit: cover;
 }
 
-/* UI/레이아웃팀 담당: List 카드 정보 간소화 */
+/* List 카드 정보 간소화 */
 .list-book-content {
   padding: 16px 18px 18px;
   text-align: left;
@@ -348,7 +348,7 @@
   line-height: 1.55;
 }
 
-/* UI/레이아웃팀 담당: 작가/등록일 메타 정보 표시 */
+/* 작가/등록일 메타 정보 표시 */
 .list-book-meta {
   display: flex;
   justify-content: space-between;
@@ -357,7 +357,6 @@
   margin-top: 8px;
   flex-wrap: wrap;
   
-  /* 여기서 디자인 속성을 다시 추가해 줍니다 */
   color: var(--color-muted);
   font-size: 13px;
   font-weight: 700;
@@ -388,7 +387,7 @@
   transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
-/* UI/레이아웃팀 담당: 목록 페이지 카드 hover 효과 추가 */
+/* 목록 페이지 카드 hover 효과 추가 */
 .image-grid-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-card-hover);
@@ -476,7 +475,93 @@
   color: var(--color-white);
 }
 
-/* UI/레이아웃팀 담당: 상세 모달 UI/레이아웃 개선 */
+
+/* 상세 모달 UI/레이아웃 개선 */
+
+.lower-footer {
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-top: 1px solid #e0dcd7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+.lower-content {
+  display: inline-flex;
+  gap: 12px;
+  color: #111;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.lower-link {
+  border: 0;
+  background: transparent;
+  color: #111;
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  padding: 0;
+}
+
+.lower-link:hover {
+  opacity: 0.82;
+}
+
+.lower-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 16px;
+}
+
+.lower-modal {
+  width: min(420px, 100%);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  box-shadow: var(--shadow-modal);
+  padding: 18px;
+}
+
+.lower-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.lower-modal-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-navy);
+}
+
+.lower-modal-close {
+  border: 0;
+  background: transparent;
+  color: #111;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.lower-modal-body p {
+  margin: 0 0 10px;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
 .book-detail-modal {
   width: min(760px, calc(100% - 32px));
   max-height: 90vh;
@@ -525,7 +610,7 @@
   width: 100%;
   max-height: 420px;
   border-radius: var(--radius-md);
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .book-detail-body {
@@ -555,7 +640,7 @@
   margin-top: 18px;
 }
 
-/* UI/레이아웃팀 담당: 상세 모달 좋아요 개수 표시 UI */
+/* 상세 모달 좋아요 개수 표시 UI */
 .book-like-info {
   display: inline-flex;
   align-items: center;
@@ -606,7 +691,7 @@
   color: #ffffff;
 }
 
-/* UI/레이아웃팀 담당: Create 새글작성 페이지 UI/레이아웃 */
+/* Create 새글작성 페이지 UI/레이아웃 */
 .create-write-page {
   width: min(920px, calc(100% - 48px));
   margin: 36px auto;

@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import Dropdown from './Dropdown'
+import MaskedApiKeyInput from './MaskedApiKeyInput'
 
 function getSavableImageUrl(imageUrl) {
   const invalidPreviewImages = [
@@ -66,6 +67,8 @@ function CreateImageForm({ title, author, content, onAddBook, onCancel }) {
         }),
       })
 
+      
+
       if (!res.ok) {
         setCoverImageUrl('/test_src/error.png')
         const errData = await res.json().catch(() => ({}))
@@ -90,7 +93,7 @@ function CreateImageForm({ title, author, content, onAddBook, onCancel }) {
   }
 
   const handleSubmitBook = async () => {
-    // 입력 검증: 제목/저자/내용이 비어있으면 등록 중단하고 알림
+
     if (!title || !title.trim()) {
       alert('제목을 입력해주세요.')
       return
@@ -127,11 +130,14 @@ function CreateImageForm({ title, author, content, onAddBook, onCancel }) {
             <div className="create-write-form">
                 <label>
                     api키
+
                     <input
+                        type= "password"
                         value={apiKey}
                         placeholder="api키"
                         onChange={(e) => setApiKey(e.target.value)}
                     />
+                    <MaskedApiKeyInput value={apiKey} onChange={setApiKey} />
                 </label>
 
                 <div className="create-quality-group">

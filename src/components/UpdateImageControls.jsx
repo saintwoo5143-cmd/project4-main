@@ -1,4 +1,5 @@
 import Dropdown from './Dropdown'
+import MaskedApiKeyInput from './MaskedApiKeyInput'
 
 function UpdateImageControls({
   apiKey,
@@ -14,11 +15,7 @@ function UpdateImageControls({
     <>
       <label>
         api키
-        <input
-          value={apiKey}
-          placeholder="api키"
-          onChange={(e) => setApiKey(e.target.value)}
-        />
+        <MaskedApiKeyInput value={apiKey} onChange={setApiKey} />
       </label>
 
       <div className="create-quality-group">

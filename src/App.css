@@ -883,6 +883,17 @@
   text-align: center;
 }
 
+.input-api-key input{
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border-cool);
+  background: #eef2f6;
+  padding: 13px 14px;
+  color: var(--color-navy);
+  font: inherit;
+  outline: none;
+} 
+
 .counter {
   margin-bottom: 24px;
   padding: 5px 10px;
@@ -1162,6 +1173,17 @@
   .create-write-layout,
   .create-two-columns {
     grid-template-columns: 1fr;
+  }
+
+  .create-preview-layout{
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .input-api-key {
+    flex: 3;  /* 더 넓은 영역 */
+    display: flex;          /* 추가 */
+    flex-direction: column;
   }
 
   .create-preview-card {

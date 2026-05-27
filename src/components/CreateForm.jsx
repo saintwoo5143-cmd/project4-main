@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import InputInfo from './InputInfo'
 import CreateImageForm from './CreateImageForm'
+import CreatePreviewCard from './CreateImagePreview'
 
 function CreateForm({ onAddBook,onCancel }) {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [author, setAuthor] = useState('')
+  const [quality, setQuality] = useState('medium')
+  const [coverImageUrl, setCoverImageUrl] = useState('/test_src/01.png')
 
+  // console.log(onAddBook);
   return (
     <section className="create-write-page">
         <div className="create-write-form">
@@ -26,8 +30,13 @@ function CreateForm({ onAddBook,onCancel }) {
             content={content}
             onAddBook={onAddBook}
             onCancel={onCancel}
+            quality={quality}
+            setQuality={setQuality}
+            coverImageUrl={coverImageUrl}
+            setCoverImageUrl={setCoverImageUrl}
           />
         </div>
+      <CreatePreviewCard coverImageUrl={coverImageUrl} quality={quality}/>
     </section>
   )
 }

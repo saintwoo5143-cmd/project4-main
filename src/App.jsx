@@ -90,46 +90,39 @@ function App() {
     }
   }
 
-  //이미지 삭제시 undefined 404에러 보완 조치
   const handleDelete = async (id) => {
     try {
-      const book = books.find((b) => String(b.id) === String(id))
+      // 삭제할 도서 정보 찾기
+      const book = books.find((b) => String(b.id) === String(id));
 
-
-    await fetch(`${bookURL}/${id}`, {
-       method: "DELETE" 
-      });
-
-      // 이미지 서버에 저장된 이미지일 때만 이미지 파일 삭제 요청
+      // 이미지 파일 삭제 요청 (있는 경우에만)
       if (book?.coverImageUrl?.includes('/images/')) {
-        const filename = book.coverImageUrl.split('/images/')[1]
-
+        const filename = book.coverImageUrl.split('/images/')[1];
         if (filename) {
           await fetch(`http://localhost:3001/api/image/${filename}`, {
             method: 'DELETE',
-          })
+          });
         }
       }
 
-      // json-server에서 도서 삭제
+      // json-server에서 도서 삭제 (요청은 딱 한 번만!)
       const res = await fetch(`${bookURL}/${id}`, {
         method: 'DELETE',
-      })
+      });
 
       if (!res.ok) {
-        const errorText = await res.text()
-        throw new Error(errorText || '삭제에 실패했습니다.')
+        throw new Error('삭제에 실패했습니다.');
       }
 
       // 프론트 상태 갱신
       setBooks((prevBooks) =>
         prevBooks.filter((b) => String(b.id) !== String(id))
-      )
-      alert('도서를 삭제했습니다')
+      );
+      alert('도서를 삭제했습니다');
     } catch (err) {
-      alert('도서 삭제에 실패했습니다')
-      console.error(err)
-      setError(err.message || '삭제에 실패했습니다.')
+      alert('도서 삭제에 실패했습니다');
+      console.error(err);
+      setError(err.message || '삭제에 실패했습니다.');
     }
   }
 

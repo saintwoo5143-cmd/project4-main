@@ -17,13 +17,18 @@ function getSavableImageUrl(imageUrl) {
   return imageUrl
 }
 
-function CreateImageForm({ title, author, content, onAddBook, onCancel }) {
+function CreateImageForm({ title, 
+                           author,
+                           content,
+                           quality, setQuality,
+                           coverImageUrl, setCoverImageUrl,
+                           onAddBook, onCancel }) {
+
   const [createdAt, setCreatedAt] = useState('')
   const [updatedAt, setUpdatedAt] = useState('')
-  const [quality, setQuality] = useState('medium')
   const [imageSize, setImageSize] = useState('768x1024')
   const [apiKey, setApiKey] = useState('')
-  const [coverImageUrl, setCoverImageUrl] = useState('/test_src/01.png')
+  // const [coverImageUrl, setCoverImageUrl] = useState('/test_src/01.png')
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -127,7 +132,7 @@ function CreateImageForm({ title, author, content, onAddBook, onCancel }) {
 
   }
     
-    return (
+    return (<>
         <form className="create-write-layout">
 
             <aside className="create-preview-card">
@@ -150,7 +155,7 @@ function CreateImageForm({ title, author, content, onAddBook, onCancel }) {
 
                 <div className="create-quality-group">
                     <p>품질</p>
-                    <Dropdown value={quality} onChange={setQuality} />
+                    <Dropdown value={quality} onChange={(e) => setQuality(e.target.value)} />
                 </div>
 
                 <div className="create-quality-group">
@@ -190,6 +195,7 @@ function CreateImageForm({ title, author, content, onAddBook, onCancel }) {
                 </div>
             </div>
         </form>
+  </>
     )
 };
 
